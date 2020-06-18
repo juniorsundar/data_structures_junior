@@ -25,37 +25,65 @@ struct wordItem
     int count;
 };
 
-void arrayDouble(int *& array, int size) {
-// Use a reference to a pointer
+void enlargeArray(wordItem *& array, int &size, int scale) {
+    // Use a reference to a pointer
+    // passing argument as reference so that the original size changes (think of aliasing)
 
-    int *newArray = new int[size*2];
+    wordItem *newArray = new wordItem[size*scale];
     for (int i = 0; i < size; i++) {
         newArray[i] = array[i];
     }
-    delete[] array;
     // delete old array
+    delete[] array;
 
     array = newArray;
+    size = scale*size;
+}
+
+bool isTaboo(std::string &checkWord, std::string checkAgainst[]){
+    // check to see if the supplied word is in the list of taboo words
+    
+    for (size_t i = 0; i < 50; i++)
+    {
+        if (checkWord == checkAgainst[i]){
+            return true;
+        }
+    }
+    return false;
 }
 
 int main(int argc, char **argv){
-    // cout << argv[1] << endl;
-    // cout << argc <<endl;
-    // int N = 10;
-    // int *b = new int[N];
-    // arrayDouble(b, N);
     
     int arrayLength = 100;
     int doubledCount = 0;
+    int wordCount = 0;
 
-    std::ifstream refText(argv[3]);
-    std::ifstream avoidWords(argv[2]);
-    std::string avoidWords[50];
-
+    // Read inputs
+    int N = std::stoi(argv[1]);             //ranking start
+    std::ifstream refText(argv[2]);         //reference text
+    std::ifstream tabooList(argv[3]);       //list of taboo words
     
-
-    // std::cout << sizeof(b) << std::endl;
+    // Hold 50 taboo words in string array
+    std::string tabooWords[50];
     
-    // std::cout << sizeof(b) << std::endl;
+    for(int i = 0; i < 50; i++){
+        std::getline(tabooList, tabooWords[i]);
+    }
+
+    // Create dynamic array for unique words
+    wordItem *uniqueWords = new wordItem[arrayLength];
+    
+    // Go through the refText. Add unique words to uniqueWords.
+    while(!refText.eof()){
+        std::string holder;
+        refText >> holder;
+        if (!isTaboo(holder, tabooWords))
+        {
+            std::cout << holder << std::endl;
+        }
+        
+        
+    }
+    // If wordCount hits arrayLength, double uniqueWords.
     return 0;
 }
