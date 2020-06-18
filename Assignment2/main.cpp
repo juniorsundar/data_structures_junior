@@ -152,5 +152,18 @@ int main(int argc, char **argv) {
     sortArray(uniqueWords, wordCount);
     
     // Print output block of code. Can ignore.
+
+    std::cout << "Array doubled: " << doubledCount << std::endl << "#" << std::endl;
+    std::cout << "Unique non-common words: " << wordCount-1 << std::endl << "#" << std::endl;
+    std::cout << "Total non-common words: " << totalUniques << std::endl << "#" << std::endl;
+    std::cout << "#" << std::endl;
+    std::cout << "Probability of next 10 words from rank " << N << std::endl;
+    std::cout << "---------------------------------------" << std::endl;
+
+    for (int i = N; i < N + 10; i++){
+        float prob = (float) uniqueWords[i].count/totalUniques;
+        std::cout << std::fixed << std::setprecision(4) << prob;
+        std::cout << " - " << uniqueWords[i].word << std::endl;
+    }
     return 0;
 }
