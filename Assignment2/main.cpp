@@ -42,14 +42,33 @@ void enlargeArray(wordItem *& array, int &size, int scale) {
 
 bool isTaboo(std::string &checkWord, std::string checkAgainst[]){
     // check to see if the supplied word is in the list of taboo words
-    
-    for (size_t i = 0; i < 50; i++)
-    {
+
+    for (size_t i = 0; i < 50; i++) {
         if (checkWord == checkAgainst[i]){
             return true;
         }
     }
     return false;
+}
+
+bool exists(std::string &checkWord, wordItem *& checkIn, int &size){
+    for (size_t i = 0; i < size; i++) {
+        if (checkWord == checkIn[i].word) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int findWord(std::string &checkWord, wordItem *& checkIn, int &size){
+    int position = 0;
+    for (size_t i = 0; i < size; i++) {
+        if (checkWord == checkIn[i].word){
+            position = i;
+            break;
+        }
+    }
+    return position;
 }
 
 int main(int argc, char **argv){
@@ -72,18 +91,29 @@ int main(int argc, char **argv){
 
     // Create dynamic array for unique words
     wordItem *uniqueWords = new wordItem[arrayLength];
-    
+
     // Go through the refText. Add unique words to uniqueWords.
     while(!refText.eof()){
         std::string holder;
         refText >> holder;
-        if (!isTaboo(holder, tabooWords))
-        {
-            std::cout << holder << std::endl;
+        if (!isTaboo(holder, tabooWords)) {
+            if (!exists(holder, uniqueWords, arrayLength))
+            {
+                uniqueWords[wordCount].word = holder;
+                uniqueWords[wordCount].count = 1;
+                wordCount ++;
+            } else {
+                int location = findWord(holder, uniqueWords, arrayLength);
+                // std::cout << holder << " " << location << std::endl; // CHECKED AND WORKS
+                uniqueWords[location].count++;
+            }  
         }
-        
-        
+        if (wordCount == arrayLength) {
+            enlargeArray(uniqueWords, arrayLength, 2);
+            doubledCount++;
+        }
     }
+
     // If wordCount hits arrayLength, double uniqueWords.
     return 0;
 }
