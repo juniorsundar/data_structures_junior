@@ -71,8 +71,39 @@ int findWord(std::string &checkWord, wordItem *& checkIn, int &size){
     return position;
 }
 
-int main(int argc, char **argv){
+int getTotal(wordItem *& checkIn, int &wordC){
+    // finds total number of unique words
+
+    int total = 0;
+
+    for (size_t i = 0; i < wordC; i++) {
+        total = total + checkIn[i].count;
+    }
+    return total;
+}
+
+void sortArray(wordItem *& checkIn, int length){            // CHECKED AND WORKS
+    // garbage method of sorting the array. Dont ask questions
+
+    wordItem temp;
+    for (size_t i = 0; i < length; i++) {
+        for (size_t j = 0; j < length; j++) {
+            if (checkIn[i].count > checkIn[j].count) {
+                temp = checkIn[j];
+                checkIn[j] = checkIn[i];
+                checkIn[i] = temp;
+            }
+        }
+    }
+}
+
+int main(int argc, char **argv) {
     
+    // Threw some errors before so I added this 
+    if (argc > 4) {
+        return -1;
+    }
+
     int arrayLength = 100;
     int doubledCount = 0;
     int wordCount = 0;
@@ -92,7 +123,7 @@ int main(int argc, char **argv){
     // Create dynamic array for unique words
     wordItem *uniqueWords = new wordItem[arrayLength];
 
-    // Go through the refText. Add unique words to uniqueWords.
+    // Go through the refText. Add unique words to uniqueWords
     while(!refText.eof()){
         std::string holder;
         refText >> holder;
@@ -108,12 +139,18 @@ int main(int argc, char **argv){
                 uniqueWords[location].count++;
             }  
         }
+        // If wordCount hits arrayLength, double uniqueWords size
         if (wordCount == arrayLength) {
             enlargeArray(uniqueWords, arrayLength, 2);
             doubledCount++;
         }
     }
 
-    // If wordCount hits arrayLength, double uniqueWords.
+    int totalUniques = getTotal(uniqueWords, wordCount);
+
+    // Sort the words in order of descending frequency
+    sortArray(uniqueWords, wordCount);
+    
+    // Print output block of code. Can ignore.
     return 0;
 }
