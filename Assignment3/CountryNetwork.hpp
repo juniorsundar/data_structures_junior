@@ -28,6 +28,7 @@ class CountryNetwork {
         // See definitions at bottom of file for method descriptions.
         // You will need to complete the 7 unfinished methods.
         CountryNetwork();
+        ~CountryNetwork();
         void insertCountry(Country* previous, string countryName); // TODO
         void loadDefaultSetup();                       // TODO
         Country* searchNetwork(string countryName);          // TODO
