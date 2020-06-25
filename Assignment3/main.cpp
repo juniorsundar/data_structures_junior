@@ -27,17 +27,23 @@ int main(int argc, char* argv[])
       switch (choice) {
         case 1:
           CountryNet.loadDefaultSetup();
+          cout << "^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+          cout << "vvvvvvvvvvvvvvvvvvvvvvvv" << endl;
           break;
         case 2:
           CountryNet.printPath();
+          cout << "^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+          cout << "vvvvvvvvvvvvvvvvvvvvvvvv" << endl;
           break;
         case 3:
           cout << "Enter name of the country to receive the message: "<< endl;
           cin.ignore();
           getline(cin,reciever);
-          cout << "Enter the message to send: " << endl << endl;
+          cout << "Enter the message to send: " << endl;
           getline(cin,message);
           CountryNet.transmitMsg(reciever, message);
+          cout << "^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+          cout << "vvvvvvvvvvvvvvvvvvvvvvvv" << endl;
           break;
         case 4:
           cout << "Enter a new country name: " << endl;
@@ -54,6 +60,8 @@ int main(int argc, char* argv[])
           }
           CountryNet.insertCountry(CountryNet.searchNetwork(prev), newc);
           CountryNet.printPath();
+          cout << "^^^^^^^^^^^^^^^^^^^^^^^^" << endl;
+          cout << "vvvvvvvvvvvvvvvvvvvvvvvv" << endl;
           break;
         case 5:
           cout << "Quitting..." << endl;
