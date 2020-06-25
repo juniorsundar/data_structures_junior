@@ -165,5 +165,6 @@ int main(int argc, char **argv) {
         std::cout << std::fixed << std::setprecision(4) << prob;
         std::cout << " - " << uniqueWords[i].word << std::endl;
     }
+    delete[] uniqueWords;
     return 0;
 }
