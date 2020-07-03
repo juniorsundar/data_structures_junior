@@ -4,7 +4,7 @@
 /* TODO: Implement menu options as described in the writeup     */
 /****************************************************************/
 
-#include "CountryNetwork.cpp"
+#include "CountryNetwork.hpp"
 // you may include more libraries as needed
 
 using namespace std;
@@ -72,10 +72,7 @@ int main(int argc, char* argv[])
           CountryNet.printPath();
           break;
         case 8:
-          cout << "Quitting... cleaning up path:" << endl;
-          CountryNet.printPath();
-          CountryNet.deleteEntireNetwork();
-          cout << "Path cleaned" << endl;
+          cout << "Quitting..." << endl;
           break;
       }
     } else {
