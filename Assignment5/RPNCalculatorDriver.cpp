@@ -4,7 +4,7 @@
 /*      TODO: Implement driver as described in the writeup      */
 /****************************************************************/
 
-#include "RPNCalculator.cpp"
+#include "RPNCalculator.hpp"
 #include <iostream>
 // you may include more libraries as needed
 
@@ -22,7 +22,7 @@ bool isNumber(string s)
     else if(s.size() > 1 && s[0] == '-') s = s.substr(1);
 
     bool point = false;
-    for(int i = 0; i < s.size(); i++)
+    for(size_t i = 0; i < s.size(); i++)
     {
       if(!isdigit(s[i]) && s[i] != '.') return false;
       if(s[i]=='.' and !point) point = true;

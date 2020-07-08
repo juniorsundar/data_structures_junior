@@ -22,33 +22,33 @@ bool ProducerConsumer::isFull() {
 }
 
 void ProducerConsumer::enqueue(std::string item) {
-  if (!isFull()) {
+  if (isFull()) {
+    cout << "Queue full, cannot add new item" << endl;
+  } else {
     queue[queueEnd] = item;
     queueEnd++;
-    queueEnd = queueEnd % 20;
+    queueEnd = queueEnd % SIZE;
     counter++;
-  } else {
-    cout << "Queue full, cannot add new item" << endl;
   }
 }
 
 void ProducerConsumer::dequeue() {
-  if (!isEmpty()) {
+  if (isEmpty()) {
+    cout << "Queue empty, cannot dequeue an item" << endl;
+  } else {
     queue[queueFront] = "";
     queueFront++;
-    queueFront = queueFront % 20;
+    queueFront = queueFront % SIZE;
     counter--;
-  } else {
-    cout << "Queue empty, cannot dequeue an item" << endl;
   }
 }
 
 std::string ProducerConsumer::peek() {
-  if (!isEmpty()) {
-    return queue[queueFront];
-  } else {
+  if (isEmpty()) {
     cout << "Queue empty, cannot peek" << endl;
     return "";
+  } else {
+    return queue[queueFront];
   }
 }
 

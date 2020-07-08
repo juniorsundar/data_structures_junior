@@ -4,7 +4,7 @@
 /* TODO: Implement menu options as described in the writeup     */
 /****************************************************************/
 
-#include "ProducerConsumer.cpp"
+#include "ProducerConsumer.hpp"
 #include <iostream>
 // you may include more libraries as needed
 
@@ -25,7 +25,7 @@ void menu()
 	cout << "*----------------------------------------*" << endl;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
 	ProducerConsumer PC;
 	int choice;
